@@ -10,7 +10,7 @@
 │   │   └── wsgi.cpython-310.pyc
 │   ├── settings.py
 │   ├── urls.py
-│   └── wsgi.py
+│   └── wsgi.py 
 ├── chat
 │   ├── admin.py
 │   ├── apps.py

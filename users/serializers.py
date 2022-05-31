@@ -11,7 +11,7 @@ from.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
-        write_only=True, required=True, validators=[validate_password])
+    write_only=True, required=True, validators=[validate_password])
 
     class Meta:
         model = User
@@ -28,6 +28,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+    def get(self):
+        user =  self.request.user
+        print(user,"---------------------------------------------------------")
 
 
 

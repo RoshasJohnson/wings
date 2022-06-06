@@ -9,7 +9,9 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 from pathlib import Path,os
 from datetime import timedelta
 
@@ -41,13 +43,12 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'corsheaders',
+    'cloudinary',
     'users',
     'feed',
     'answer',
     'questions',
-    'topics',
-
-
+    'topics'
 ]
 AUTH_USER_MODEL = 'users.User'
 
@@ -93,7 +94,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 DATABASES = {
     'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'wings', 
+        'NAME': 'duck', 
         'USER': 'roshas', 
         'PASSWORD': 'roshas',
         'HOST': '127.0.0.1', 

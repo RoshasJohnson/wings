@@ -15,13 +15,10 @@ class NonStrippingCharField(models.TextField):
 class Question(models.Model):
 
     questioner = models.ForeignKey(User, on_delete=models.CASCADE)
-    question_title = models.CharField(max_length=200, null=True)
+    question_title = models.TextField(null=True)
     question_topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
-    questionssssssssss = models.TextField(null=True,default='1')
-    #un neccessry field
     question    = models.TextField(null=True)
-  
-    attached_file = models.FileField(default="file.jpg", null=True)
+    attached_file = models.FileField(upload_to='QnA/answers/', null=True)
     created_at = models.DateTimeField(auto_now=timezone.now)
     right_answer = models.IntegerField(null=True,default=0) 
 

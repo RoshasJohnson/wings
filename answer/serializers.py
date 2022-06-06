@@ -1,5 +1,5 @@
 
-from.models import Answer,Replay_Answer
+from.models import Answer,Vote
 from rest_framework import serializers
 from users.serializers import UserSerializer
 
@@ -11,8 +11,13 @@ class AnswerSerializer(serializers.ModelSerializer):
         fields = "__all__"
         
 
-class ReplayAnswerSerializer(serializers.ModelSerializer):
+class VoteSerializer(serializers.ModelSerializer):
+    votes_count =serializers.SerializerMethodField()
+    
+
     class Meta:
-        model = Replay_Answer
+        model = Vote
         fields = "__all__"
-  
+    def get_vote_count(self,obj):
+        pass
+         

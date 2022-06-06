@@ -25,7 +25,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("",include("users.urls")),   
     path("questions/",include("questions.urls")),
-    path("answers/",include("answer.urls")),
+    path("get_answer/",include("answer.urls")),
     path("topics",get_all_topics)
 
 

@@ -14,6 +14,7 @@ class Answer(models.Model):
     attached_file = models.FileField(upload_to='QnA/answers/', null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     is_edited = models.BooleanField(default=False, null=True)
+    vote     = models.ManyToManyField(User, related_name="vote_answer")
     """
     people  vote the corresponding answer which questioner asked 
     """
@@ -24,6 +25,11 @@ class Answer(models.Model):
 
 
 class Vote(models.Model):
-    voter = models.ForeignKey(User, on_delete=models.CASCADE)
-    answer = models.ForeignKey(Answer,on_delete=models.CASCADE)
-    vote = models.IntegerField(default=0,null= True)
+    # voter = models.ForeignKey("User",related_name="use", on_delete=models.CASCADE)
+    # answer = models.ForeignKey("Answer" ,related_name="answe",on_delete=models.CASCADE)
+    # vote = models.BooleanField(default=False,null= True)
+    vote_count = models.IntegerField(default=0,null=True)
+
+
+    def __str__(self):
+        return str(self.answer)

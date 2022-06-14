@@ -26,6 +26,7 @@ urlpatterns = [
     path("",include("users.urls")),   
     path("questions/",include("questions.urls")),
     path("get_answer/",include("answer.urls")),
+    path("feeds/",include("feed.urls")),
     path("topics",get_all_topics)
 
 

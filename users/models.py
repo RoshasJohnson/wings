@@ -6,30 +6,30 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.postgres.fields import ArrayField
 
 
-class User(AbstractUser):
+class User(AbstractUser):   # AbstractUser is a built-in Django model
     def get_default():
-         return str({})
+         return str({}) 
     username = models.CharField(max_length=200, unique=True)
     email = models.CharField(max_length=200, unique=True)
-    password = models.CharField(max_length=200)
+    password = models.CharField(max_length=200) 
     fullname = models.CharField(max_length=200, null=True)
     status = models.BooleanField(default=True)
     bio = models.TextField(blank=True, default="")
     suggested_topic = ArrayField(models.CharField(
         max_length=100), default=get_default)
-    follows = models.ManyToManyField(
+    follows = models.ManyToManyField(   
         "self",
         related_name="followed_by",
         symmetrical=False,
         blank=True    
-    )    
-    avatar = models.ImageField(default='', upload_to='UserProfile/avatar/')
-    cover_image = models.ImageField(default="", upload_to='UserProfile/cover/')
+    ) # user who follows this user       
+    avatar = models.FileField( upload_to='UserProfile/avatar/',null = True)
+    cover_image = models.FileField( upload_to='UserProfile/cover/',null = True)
     created_at = models.DateTimeField(default=timezone.now)
 
-    USERNAME_FIELD = 'email'
-    # requred for creating user
-    REQUIRED_FIELDS = ['username']
+    USERNAME_FIELD = 'email'    # username field is email
+    
+    REQUIRED_FIELDS = ['username']  # required fields for user model
 
     class Meta:
         ordering = ['-date_joined']
@@ -39,19 +39,4 @@ class User(AbstractUser):
         return f'{self.username}'
 
 
-# class Profile(models.Model):
-#     def get_default():
-#         return str("")
 
-   
-#     suggested_topic = ArrayField(models.CharField(
-#         max_length=100), default=get_default)
-#     follows = models.ManyToManyField(
-#         "self",
-#         related_name="followed_by",
-#         symmetrical=False,
-#         blank=True    
-#     )    
-
-#     def __str__(self):
-#         return self.user.username

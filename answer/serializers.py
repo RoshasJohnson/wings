@@ -1,5 +1,5 @@
 
-from.models import Answer,Vote
+from.models import Answer ,Vote
 from rest_framework import serializers
 from users.serializers import UserSerializer
 
@@ -12,12 +12,21 @@ class AnswerSerializer(serializers.ModelSerializer):
         
 
 class VoteSerializer(serializers.ModelSerializer):
-    votes_count =serializers.SerializerMethodField()
-    
+    # votes =serializers.SerializerMethodField(read_only=True)
+    votes = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Vote
-        fields = "__all__"
-    def get_vote_count(self,obj):
-        pass
+        fields = [
+            'id',
+            'voter',
+            'answer',
+            'vote',
+            'votes'
+        ]
+    # def get_votes(self,obj):
+    #     return obj.vote.count()
          
+    def get_votes(self,obj):
+
+        return obj.vote.count()

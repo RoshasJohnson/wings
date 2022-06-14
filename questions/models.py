@@ -3,9 +3,11 @@ from django.utils import timezone
 from django.db import models
 from topics.models import Topic
 from users.models import User
-
+# from ckeditor.fields import RichTextField
 
 # Create your models here.
+
+
 class NonStrippingCharField(models.TextField):
     def formfield(self, **kwargs):
         kwargs['strip'] = False
@@ -14,13 +16,17 @@ class NonStrippingCharField(models.TextField):
 
 class Question(models.Model):
 
-    questioner = models.ForeignKey(User, on_delete=models.CASCADE)
+    questioner = models.ForeignKey(User, on_delete=models.CASCADE)  # user who asked the question
     question_title = models.TextField(null=True)
-    question_topic = models.ForeignKey(Topic, on_delete=models.CASCADE, null=True)
-    question    = models.TextField(null=True)
-    attached_file = models.FileField(upload_to='QnA/answers/', null=True)
-    created_at = models.DateTimeField(auto_now=timezone.now)
-    right_answer = models.IntegerField(null=True,default=0) 
 
+    question_topic = models.ForeignKey(
+        Topic, on_delete=models.CASCADE, null=True)
+    question = models.TextField(null=True)
+    attached_file = models.FileField(upload_to='QnA/answers/', null=True) 
+    created_at = models.DateTimeField(auto_now=timezone.now)
+    right_answer = models.IntegerField(null=True, default=0)
+
+    
+    
     def __str__(self):
         return f'{self.question_title}'

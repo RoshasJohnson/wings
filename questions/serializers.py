@@ -10,7 +10,7 @@ from answer.serializers import AnswerSerializer
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    question  =  serializers.CharField(trim_whitespace=False)
+    question  =  serializers.CharField(trim_whitespace=False) 
 
     # question_type   = QuestionTypeSerialzers(read_only = True)
     # answers_set     = AnswerSerializer(read_only = True,many =True)
@@ -26,6 +26,7 @@ class QuestionSerializer(serializers.ModelSerializer):
                 "question",
                 "attached_file",
                 "created_at",
+                'right_answer'
             
         )
 

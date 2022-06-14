@@ -1,3 +1,4 @@
+from re import U
 from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view, permission_classes
 from users.models import User
@@ -103,6 +104,7 @@ def create_question(request):
     question = data['question']
     q_topic = data['topic']
     image = data['image']
+    print(image,"==========================")
     user = User.objects.get(username=req_user)
     topic = Topic.objects.get(topics=q_topic)
     print(title)
@@ -116,8 +118,31 @@ def create_question(request):
 @api_view(['GET'])
 def topic_wise(request,fk):
     questions_topic_wise = Question.objects.filter(question_topic = fk)
-    print(questions_topic_wise,'==============================')
     serializers = QuestionSerializer(questions_topic_wise,many = True)
     return Response({
         "topicWise":serializers.data
     })
+
+
+@api_view(['GET'])
+def my_question(request):
+    user = User.objects.get(username = request.user)
+    get_myquestions  = Question.objects.filter(questioner = user).order_by("-id")
+    serializers      = QuestionSerializer(get_myquestions,many = True)
+    return Response({
+        "MyQuestions":serializers.data
+    })
+
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def got_answer(request):
+    user  =request.user
+    data= request.data
+    queId = data['question']
+    ansId = data['answer']
+    question = Question.objects.get(questioner = user,id = queId)
+    question.right_answer = ansId
+    question.save()
+    print("ok")
+    print(user,"username is")
+    return Response("OK") 

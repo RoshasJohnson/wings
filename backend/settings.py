@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
+
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
@@ -28,7 +29,7 @@ SECRET_KEY = 'django-insecure-ahp$ut708!3tlcybut982z3z%fa^3zvt^o2t=3)@=&d!@qhx0p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,12 +44,16 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework',
     'corsheaders',
+    'ckeditor',
     'cloudinary',
     'users',
     'feed',
     'answer',
     'questions',
-    'topics'
+    'topics',
+    'chat',
+    'notifications',
+    
 ]
 AUTH_USER_MODEL = 'users.User'
 
@@ -65,9 +70,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'backend.urls'
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000'
-]
+# CORS_ORIGIN_WHITELIST = [
+#     'http://localhost:3000'
+# ]
+CORS_ORIGIN_ALLOW_ALL = True # any website can asscess this apis
 
 TEMPLATES = [
     {
@@ -193,3 +199,5 @@ MEDIA_URL = '/media/'
 #   api_key = "788986685782646", 
 #   api_secret = "8zuAAjZo5flOO5JYy9VnwaRYk9w" 
 # )
+
+ASGI_APPLICATION = 'backend.asgi.application'

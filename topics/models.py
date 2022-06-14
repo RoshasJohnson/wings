@@ -5,7 +5,7 @@ from django.db import models
 
 class Topic(models.Model):
 
-    def get_default():
+    def get_default():  
         return ("")
 
     topics = models.CharField(max_length=100, default="")
@@ -13,5 +13,5 @@ class Topic(models.Model):
     def __str__(self):
         return str(self.topics).title()
 
-    def make_capital(self):
-        self.topics.title()
+    def make_capital(self):  # make first letter of each word capital
+        self.topics.title() 

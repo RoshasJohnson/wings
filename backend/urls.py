@@ -27,7 +27,11 @@ urlpatterns = [
     path("questions/",include("questions.urls")),
     path("get_answer/",include("answer.urls")),
     path("feeds/",include("feed.urls")),
-    path("topics",get_all_topics)
+    path("topics",get_all_topics),
+    path("adminpanel/",include("superuser.urls")),
+    path("report/",include("reports.urls")),
+    path("chat/",include("chat.urls"))
+
 
 
 ]

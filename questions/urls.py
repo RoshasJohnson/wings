@@ -7,6 +7,6 @@ urlpatterns = [
     path("<int:pk>/", QuestionDetails.as_view(), name="question"),
     path("topic-wise/<int:fk>/", topic_wise, name="topic"),
     path("my-question", my_question, name="my-question"),
-    path("got_answer", got_answer, name="got_answer")
+    path("select_answer", got_answer, name="got_answer")
 
 ]

@@ -18,7 +18,6 @@ class FeedListView(APIView):
     def post(self,request):
         user = request.user
         data = request.data
-        print(user,"============================================")
         description = data['description']
         image = data['image'] 
         Feed.objects.create(author=user,description=description,post=image)
@@ -33,7 +32,11 @@ class FeedListView(APIView):
         else:
             post.is_like.add(user)
         post.save()
-        return Response(status=status.HTTP_200_OK)
+
+        like_count = post.is_like.count()
+        print(like_count,'===================================')
+        return Response(like_count, status=status.HTTP_200_OK)
+        # return Response()
 
 
 

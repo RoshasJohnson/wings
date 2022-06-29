@@ -29,4 +29,7 @@ class Question(models.Model):
     
     
     def __str__(self):
-        return f'{self.question_title}'
+        return f'{self.question_title}'  
+
+
+    

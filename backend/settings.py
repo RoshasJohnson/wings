@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'topics',
     'chat',
     'notifications',
+    'reports'
     
 ]
 AUTH_USER_MODEL = 'users.User'

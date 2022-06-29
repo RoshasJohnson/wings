@@ -22,7 +22,8 @@ class User(AbstractUser):   # AbstractUser is a built-in Django model
         related_name="followed_by",
         symmetrical=False,
         blank=True    
-    ) # user who follows this user       
+    ) # user who follows this user
+    profession = models.CharField(max_length=200, null=True)       
     avatar = models.FileField( upload_to='UserProfile/avatar/',null = True)
     cover_image = models.FileField( upload_to='UserProfile/cover/',null = True)
     created_at = models.DateTimeField(default=timezone.now)

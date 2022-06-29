@@ -1,4 +1,4 @@
-from re import U
+
 from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view, permission_classes
 from users.models import User
@@ -138,11 +138,10 @@ def my_question(request):
 def got_answer(request):
     user  =request.user
     data= request.data
+    print(request.data,"=================")
     queId = data['question']
     ansId = data['answer']
     question = Question.objects.get(questioner = user,id = queId)
     question.right_answer = ansId
     question.save()
-    print("ok")
-    print(user,"username is")
-    return Response("OK") 
+    return Response(status=status.HTTP_200_OK)

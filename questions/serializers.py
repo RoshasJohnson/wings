@@ -32,4 +32,4 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     # def get_answers(self,obj):
     #     try:
-    #         return Answer.objects.filter(question = obj)
+    #         return Answer.objects.filter(question = obj)  

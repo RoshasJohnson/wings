@@ -59,6 +59,10 @@ def get_comment(request,fk):
 
         comments = Feed.objects.get(id=fk).parent_comment.all()
         print(comments,'===================================')
+
+        if request.GET.get("search"):
+            comments = comments.filter(username=request.GET.get("search", ""))
+
         serializers = CommentSerializer(comments,many = True)
         return Response(serializers.data)
         # return Response(status=status.HTTP_400_BAD_REQUEST)

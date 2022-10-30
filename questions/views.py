@@ -13,6 +13,7 @@ from rest_framework.views import APIView
 from.models import Question
 from.serializers import QuestionSerializer
 # Create your views here.
+from django.core.paginator import Paginator
 
 
 class QuestionView(APIView):
@@ -42,7 +43,14 @@ class QuestionView(APIView):
             return Response(serializer.data)
         # except:
         questions = Question.objects.all()
-        serializer = QuestionSerializer(questions, many=True)
+
+
+        per_page = request.GET.get("per_page", 10)
+        page = request.GET.get("page", 1)
+        paginator = Paginator(questions, per_page)
+        page_obj = paginator.get_page(page)
+
+        serializer = QuestionSerializer(page_obj.object_list, many=True)
         return Response(serializer.data)
 
     def post(self, request):

@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
-from feed.models import Feed,Comment
+from feed.models import Feed,Comment, Like
 from feed.serializers import FeedSerializer,CommentSerializer
 from users.models import User
 # Create your views here.
@@ -86,3 +86,16 @@ class CommentListView(APIView):
         Comment.objects.create(username=user,body=com_body,post=parent)
         print("comment created successfully")
         return Response(status=status.HTTP_201_CREATED)
+
+from django.db.models import Count
+
+class ReportView(APIView):
+    def get(self,request, *args, **kwargs):
+        # post most liked
+        most_liked = Like.objects.values("id", "post").annotate(post_count=Count("post")).order_by("-post_count").first()
+        feed_serializer = FeedSerializer(most_liked)
+        return Response(
+            feed_serializer.data
+        )
+
+

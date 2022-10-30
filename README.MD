@@ -1,0 +1,2 @@
+- Wings is a project used for ask programming reated questions
+- We have option to ask questions and comments for the questions and option for like the answer

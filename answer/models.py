@@ -13,6 +13,7 @@ class Answer(models.Model):
     answer = models.TextField()
     attached_file = models.FileField(upload_to='QnA/answers/', null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
     is_edited = models.BooleanField(default=False, null=True)
     vote     = models.ManyToManyField(User, related_name="vote_answer")
     is_report = models.BooleanField(default=False,null=True)

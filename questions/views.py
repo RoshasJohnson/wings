@@ -1,4 +1,5 @@
 
+from questions.filters import convert_query_params_to_dict, filter_questions
 from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view, permission_classes
 from users.models import User
@@ -136,6 +137,10 @@ def topic_wise(request,fk):
 def my_question(request):
     user = User.objects.get(username = request.user)
     get_myquestions  = Question.objects.filter(questioner = user).order_by("-id")
+
+    filter_query = convert_query_params_to_dict(request.GET)
+    get_myquestions = filter_questions(get_myquestions, filter_query)
+
     serializers      = QuestionSerializer(get_myquestions,many = True)
     return Response({
         "MyQuestions":serializers.data
